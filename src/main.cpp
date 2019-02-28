@@ -3,30 +3,29 @@
 #include <DNSServer.h>
 #include <ESP8266WebServer.h>
 #include <WiFiManager.h>
+#include <WifiLocation.h>
+#include <dweetESP8266.h>
 
-String thingName = WiFi.macAddress();
-const char* host = "dweet.io";
-const int httpPort = 80;
+const char* googleApiKey = "YOUR API KEY HERE";
+char latKey[] = "your_latitude";
+char lonKey[] = "your_longitude";
+char thingName[20];
+WifiLocation location(googleApiKey);
+dweet dweetClient;
 
 void setup() {
   Serial.begin(9600);
   WiFiManager wifiManager;
   wifiManager.autoConnect();
+  WiFi.macAddress().toCharArray(thingName, 20);
 }
 
 void loop() {
-  WiFiClient client;
-  if (!client.connect(host, httpPort)) {
-    Serial.println("connection failed");
-    client.stop();
-    return;
-  }
-  int latitude = random(-85, 85);
-  int longitude = random(-180, 180);
-  Serial.printf("(%d, %d)\n", latitude, longitude);
-  client.print(String("GET /dweet/for/") + thingName + "?your_latitude=" + latitude + "&your_longitude=" + longitude + " HTTP/1.1\r\n" +
-    "Host: " + host + "\r\n" +
-    "Connection: close\r\n\r\n"
-  );
+  location_t loc = location.getGeoFromWiFi();
+  Serial.printf("\n(%f, %f)\n", loc.lat, loc.lon);
+  dweetClient.add(latKey, String(loc.lat));
+  dweetClient.add(lonKey, String(loc.lon));
+  dweetClient.sendAll(thingName);
   delay(30000);
 }
+
