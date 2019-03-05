@@ -1,0 +1,6 @@
+{
+  "terminal.integrated.env.windows": {
+    "PATH": "C:\\Users\\warit\\.platformio\\penv\\Scripts;C:\\Users\\warit\\.platformio\\penv;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\nodejs\\;C:\\Users\\warit\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\warit\\AppData\\Roaming\\npm;C:\\Users\\warit\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Program Files\\heroku\\bin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\nodejs\\;C:\\Users\\warit\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\warit\\AppData\\Roaming\\npm;C:\\Users\\warit\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Program Files\\heroku\\bin",
+    "PLATFORMIO_CALLER": "vscode"
+  }
+}
