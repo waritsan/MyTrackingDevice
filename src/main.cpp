@@ -20,7 +20,7 @@ void setup() {
 
 void loop() {
   long now = millis();
-  if (now - lastMsg > 10000) {
+  if (now - lastMsg > 5000) {
     lastMsg = now;
     WiFiClient client;
     if (!client.connect(host, httpPort)) {
@@ -29,8 +29,13 @@ void loop() {
       return;
     }
     location_t loc = location.getGeoFromWiFi();
-    Serial.printf("(%f, %f)\n", loc.lat, loc.lon);
-    client.print(String("GET /dweet/for/") + thingName + "?your_latitude=" + loc.lat + "&your_longitude=" + loc.lon + " HTTP/1.1\r\n" +
+    char latBuff[20];
+    sprintf(latBuff, "%f", loc.lat);
+    Serial.println(latBuff);
+    char lonBuff[20];
+    sprintf(lonBuff, "%f", loc.lon);
+    Serial.printf("(%s, %s)\n", latBuff, lonBuff);
+    client.print(String("GET /dweet/for/") + thingName + "?your_latitude=" + latBuff + "&your_longitude=" + lonBuff + "&timestamp=" + "2019-03-06T19:38:47.300Z" + now/1000 + " HTTP/1.1\r\n" +
       "Host: " + host + "\r\n" +
       "Connection: close\r\n\r\n"
     );
